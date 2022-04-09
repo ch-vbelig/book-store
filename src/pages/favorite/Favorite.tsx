@@ -1,17 +1,18 @@
-import React from 'react'
-import { Box, Divider, IconButton, Stack, SvgIcon, Typography } from '@mui/material'
-import rootStore from '../../stores/RootStore'
-import BookItem from './components/BookItem'
 import { observer } from 'mobx-react'
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined'
+import { Box, Divider, Stack, SvgIcon, Typography } from '@mui/material'
+import rootStore from '../../stores/RootStore'
+import StarIcon from '@mui/icons-material/Star'
+import FavoriteBookItem from './components/FavoriteBookItem'
+import BookButton from '../../components/button/BookButton'
+import React from 'react'
 
 
-const Search: React.FC = () => {
-    const search = rootStore.search.search
-    const filteredBooks = rootStore.library.books.filter((book) => book.bookKeyWords.includes(search.toLowerCase()))
+const Favorite: React.FC = () => {
+    const favorites = rootStore.favorite.favorites
+    const isAuthorized = rootStore.auth.isAuthorized
 
-    const handleOpenFilter = () => {
-        rootStore.search.openFilterPopup()
+    const handleSaveChanges = () => {
+        rootStore.favorite.saveChanges()
     }
 
     return (
@@ -26,28 +27,23 @@ const Search: React.FC = () => {
                 alignItems={'center'}
                 spacing={1}
             >
-
                 <Typography variant={'h6'}
                             fontWeight={600}
                             fontSize={26}
                             fontFamily={'"Montserrat", sans-serif'}
                 >
-                    Результаты поиска
+                    Избранное
                 </Typography>
 
-                <IconButton
-                    onClick={handleOpenFilter}
-                >
-                    <SvgIcon fontSize={'large'} htmlColor={'black'}>
-                        <FilterAltOutlinedIcon/>
-                    </SvgIcon>
-                </IconButton>
+                <SvgIcon fontSize={'large'} htmlColor={'black'}>
+                    <StarIcon/>
+                </SvgIcon>
             </Stack>
             <Divider/>
 
             {
-                filteredBooks.length > 0 ?
-                    filteredBooks.map((book) => <BookItem book={book}/>)
+                favorites.length > 0 ?
+                    favorites.map((book) => <FavoriteBookItem book={book}/>)
                     :
                     <Box
                         sx={{
@@ -69,8 +65,26 @@ const Search: React.FC = () => {
                         </Typography>
                     </Box>
             }
+
+            {
+                rootStore.favorite.favoritesToDelete.length > 0 &&
+                <BookButton
+                    onClick={handleSaveChanges}
+                    sx={{
+                        mt: 2,
+                        alignSelf:'end'
+                    }}
+                >
+                    <Typography
+                        fontSize={16}
+                        fontWeight={500}
+                    >
+                        Сохранить
+                    </Typography>
+                </BookButton>
+            }
         </Stack>
     )
 }
 
-export default observer(Search)
+export default observer(Favorite)

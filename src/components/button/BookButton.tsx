@@ -5,9 +5,9 @@ import { Button } from '@mui/material'
 const BookButton = styled(Button)(({theme, variant}) => ({
     boxShadow: 'none',
     textTransform: 'none',
-    fontSize: 16,
-    padding: '8px 40px',
-    border: '1px solid',
+    fontSize: 18,
+    padding: '4px 20px',
+    border: '2px solid',
     borderRadius: 20,
     lineHeight: 1.5,
     backgroundColor: variant == 'outlined' ? '#FFFFFF' : '#000000',
@@ -27,7 +27,8 @@ const BookButton = styled(Button)(({theme, variant}) => ({
     ].join(','),
     '&:hover': {
         backgroundColor: variant == 'outlined' ? '#FFFFFF' : '#000000',
-        borderColor: variant == 'outlined' ? '#FFFFFF' : '#000000',
+        borderColor: variant == 'outlined' ? '#000000' : '#FFFFFF',
+        border: '2px solid',
         boxShadow: 'none',
     },
     '&:active': {
@@ -36,7 +37,7 @@ const BookButton = styled(Button)(({theme, variant}) => ({
         // borderColor: '#005cbf',
     },
     '&:focus': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+        // boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
 }));
 

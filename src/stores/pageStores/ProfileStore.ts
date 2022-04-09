@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 
 // @ts-ignore
-class UserStore {
+class ProfileStore {
 
     firstname = 'Belig'
     lastname = 'Chimitov'
@@ -17,4 +17,4 @@ class UserStore {
 
 }
 
-export default UserStore
+export default ProfileStore

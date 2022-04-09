@@ -1,12 +1,12 @@
-import React from 'react'
 import { Stack, Typography } from '@mui/material'
-import BookCover from './components/BookCover'
-import rootStore from '../../stores/RootStore'
+import BookSlider from '../../../components/bookElements/BookSlider'
+import rootStore from '../../../stores/RootStore'
+import BookCover from './BookCover'
+import React from 'react'
 import { observer } from 'mobx-react'
-import BookSlider from '../../components/bookElements/BookSlider'
 
 
-const Main: React.FC = () => {
+const MainPage: React.FC = () => {
     return (
         <Stack
             sx={{
@@ -18,15 +18,15 @@ const Main: React.FC = () => {
                         fontSize={26}
                         fontFamily={'"Montserrat", sans-serif'}
                         sx={{
-                            ml: 4
+                            ml: 4,
                         }}
             >
                 Новинки
             </Typography>
             <BookSlider variant="scrollable"
                         scrollButtons
-                        // value={0}
-                        // allowScrollButtonsMobile
+                // value={0}
+                // allowScrollButtonsMobile
             >
                 {rootStore.library.books.map((book, index) => (<BookCover book={book}/>))}
             </BookSlider>
@@ -36,14 +36,14 @@ const Main: React.FC = () => {
                         fontSize={26}
                         fontFamily={'"Montserrat", sans-serif'}
                         sx={{
-                            ml: 4
+                            ml: 4,
                         }}
             >
                 Детективы
             </Typography>
             <BookSlider variant="scrollable"
                         scrollButtons
-                        // allowScrollButtonsMobile
+                // allowScrollButtonsMobile
             >
                 {rootStore.library.books.map((book, index) => (<BookCover book={book}/>))}
             </BookSlider>
@@ -53,7 +53,7 @@ const Main: React.FC = () => {
                         fontSize={26}
                         fontFamily={'"Montserrat", sans-serif'}
                         sx={{
-                            ml: 4
+                            ml: 4,
                         }}
             >
                 Криминал
@@ -62,13 +62,13 @@ const Main: React.FC = () => {
 
             <BookSlider variant="scrollable"
                         scrollButtons
-                        // allowScrollButtonsMobile
+                // allowScrollButtonsMobile
             >
                 {rootStore.library.books.map((book, index) => (<BookCover book={book}/>))}
             </BookSlider>
         </Stack>
     )
-
 }
 
-export default observer(Main)
+
+export default observer(MainPage)

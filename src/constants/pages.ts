@@ -1,8 +1,10 @@
 export enum Pages{
     MAIN = '/',
     SEARCH = '/search',
-    BOOK_INFO = 'bookinfo',
-    CART = 'cart'
+    ABOUT_BOOK = '/aboutBook',
+    CART = '/cart',
+    FAVORITE = '/favorite',
+    ORDERS = '/orders',
 
 
 }

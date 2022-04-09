@@ -1,18 +1,18 @@
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material'
-import BookButton from '../../components/button/BookButton'
+import BookButton from '../../../components/button/BookButton'
 import React from 'react'
 import { observer } from 'mobx-react'
-import stores from '../../../stores/Stores'
+import rootStore from '../../../stores/RootStore'
 import authUserImage from '../../../assets/images/account_vector.svg'
 
 
 const AuthPopup: React.FC = () => {
     const handleEnter = () => {
-        stores.auth.authorize()
+        rootStore.auth.authorize()
     }
 
     const handleToRegister = () => {
-        stores.auth.toRegister()
+        rootStore.auth.toRegister()
     }
 
     return (
@@ -66,6 +66,9 @@ const AuthPopup: React.FC = () => {
 
                 <BookButton
                     onClick={handleEnter}
+                    sx={{
+                        px: 4
+                    }}
                 >
                     Войти
                 </BookButton>

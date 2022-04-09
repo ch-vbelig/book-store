@@ -1,34 +1,24 @@
 import { observer } from 'mobx-react'
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { alpha, styled } from '@mui/material/styles'
-import stores from '../../stores/Stores'
+import rootStore from '../../stores/RootStore'
 import AuthPopup from './popups/AuthPopup'
 import SignUpPopup from './popups/SignUpPopup'
+import BackgroundBlur from '../../components/BackgroundBlur'
 
-
-const BackgroundBlur = styled('div')(({ theme }) => ({
-    position: 'fixed',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-    backgroundColor: alpha(theme.palette.common.black, 0.2),
-}))
 
 const Auth: React.FC = () => {
-    if (!stores.auth.isAuthPopup && !stores.auth.isRegisterPopup) return null
+    if (!rootStore.auth.isAuthPopup && !rootStore.auth.isRegisterPopup) return null
 
     const handleClose = () => {
-      stores.auth.leaveAuthPopup()
+      rootStore.auth.leaveAuthPopup()
     }
 
     return ReactDOM.createPortal(
         <>
             <BackgroundBlur onClick={handleClose}/>
-            {stores.auth.isAuthPopup && <AuthPopup/>}
-            {stores.auth.isRegisterPopup && <SignUpPopup/>}
+            {rootStore.auth.isAuthPopup && <AuthPopup/>}
+            {rootStore.auth.isRegisterPopup && <SignUpPopup/>}
         </>
         , document.getElementById('portal') as HTMLElement,
     )

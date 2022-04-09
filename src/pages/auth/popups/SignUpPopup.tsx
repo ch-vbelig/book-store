@@ -1,18 +1,18 @@
 import { observer } from 'mobx-react'
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material'
-import React, { MouseEventHandler } from 'react'
-import BookButton from '../../components/button/BookButton'
-import stores from '../../../stores/Stores'
+import React from 'react'
+import BookButton from '../../../components/button/BookButton'
+import rootStore from '../../../stores/RootStore'
 
 
 const SignUpPopup: React.FC = () => {
     const handleRegister = () => {
         console.log('Registration')
-        stores.auth.authorize()
+        rootStore.auth.authorize()
     }
 
     const handleToAuthorize = () => {
-        stores.auth.toAuthorize()
+        rootStore.auth.toAuthorize()
     }
 
     return (
