@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react'
 import { Divider, Paper, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import BookButton from '../../../components/button/BookButton'
 import rootStore from '../../../stores/RootStore'
 import BackgroundBlur from '../../../components/BackgroundBlur'
@@ -8,7 +8,45 @@ import BackgroundBlur from '../../../components/BackgroundBlur'
 
 const OrderPopup: React.FC = () => {
 
-    if (!rootStore.cart.isOrderPopup) return null
+    const [firstname, setFirstName] = useState(rootStore.user.firstname)
+    const [lastname, setLastName] = useState(rootStore.user.lastname)
+    const [email, setEmail] = useState(rootStore.user.email)
+    const [city, setCity] = useState(rootStore.user.city)
+    const [street, setStreet] = useState(rootStore.user.street)
+    const [house, setHouse] = useState(rootStore.user.house)
+    const [addressIndex, setAddressIndex] = useState(rootStore.user.addressIndex)
+
+    const handleChangeFirstName = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setFirstName(event.target.value)
+    }
+
+    const handleChangeLastName = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setLastName(event.target.value)
+    }
+
+    const handleChangeEmail = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setEmail(event.target.value)
+    }
+
+    const handleChangeCity = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setCity(event.target.value)
+        rootStore.cart.setCity(event.target.value)
+    }
+
+    const handleChangeStreet = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setStreet(event.target.value)
+        rootStore.cart.setStreet(event.target.value)
+    }
+
+    const handleChangeHouse = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setHouse(event.target.value)
+        rootStore.cart.setHouse(event.target.value)
+    }
+
+    const handleChangeAddressIndex = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setAddressIndex(event.target.value)
+        rootStore.cart.setIndex(event.target.value)
+    }
 
     const handleClose = () => {
         rootStore.cart.closeOrderPopup()
@@ -19,6 +57,7 @@ const OrderPopup: React.FC = () => {
         rootStore.cart.closeOrderPopup()
     }
 
+    if (!rootStore.cart.isOrderPopup) return null
     return (
         <>
             <BackgroundBlur onClick={handleClose}/>
@@ -67,6 +106,8 @@ const OrderPopup: React.FC = () => {
                         required
                         label={'Имя'}
                         variant={'outlined'}
+                        value={firstname}
+                        onChange={handleChangeFirstName}
                         sx={{
                             width: '100%',
                         }}
@@ -76,6 +117,8 @@ const OrderPopup: React.FC = () => {
                         required
                         label={'Фамилия'}
                         variant={'outlined'}
+                        value={lastname}
+                        onChange={handleChangeLastName}
                         sx={{
                             width: '100%',
                         }}
@@ -85,6 +128,8 @@ const OrderPopup: React.FC = () => {
                         required
                         label={'Email'}
                         variant={'outlined'}
+                        value={email}
+                        onChange={handleChangeEmail}
                         sx={{
                             width: '100%',
                         }}
@@ -108,6 +153,8 @@ const OrderPopup: React.FC = () => {
                         required
                         label={'Город'}
                         variant={'outlined'}
+                        value={city}
+                        onChange={handleChangeCity}
                         sx={{
                             width: '100%',
                         }}
@@ -116,6 +163,8 @@ const OrderPopup: React.FC = () => {
                         required
                         label={'Улица'}
                         variant={'outlined'}
+                        value={street}
+                        onChange={handleChangeStreet}
                         sx={{
                             width: '100%',
                         }}
@@ -125,6 +174,8 @@ const OrderPopup: React.FC = () => {
                         required
                         label={'Дом'}
                         variant={'outlined'}
+                        onChange={handleChangeHouse}
+                        value={house}
                         sx={{
                             width: '100%',
                         }}
@@ -133,7 +184,9 @@ const OrderPopup: React.FC = () => {
                     <TextField
                         required
                         label={'Индекс'}
+                        value={addressIndex}
                         variant={'outlined'}
+                        onChange={handleChangeAddressIndex}
                         sx={{
                             width: '100%',
                         }}

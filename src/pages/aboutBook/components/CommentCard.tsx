@@ -14,12 +14,12 @@ const CommentCard: React.FC<CommentProps> = ({ comment }) => {
         <Stack direction={'row'}>
             <Box
                 sx={{
-                    flex: comment.id == 1 ? 1 : 0,
+                    flex: comment.userId == 1 ? 1 : 0,
                 }}
             >
             </Box>
             <Stack
-                direction={comment.id == 1 ? 'row-reverse' : 'row'}
+                direction={comment.userId == 1 ? 'row-reverse' : 'row'}
             >
                 <Avatar sx={{ bgcolor: red[500] }}>
                     R
@@ -31,9 +31,9 @@ const CommentCard: React.FC<CommentProps> = ({ comment }) => {
                            m: 1,
                            flex: 1,
                            // maxWidth: 0.5,
-                           width: 240   ,
-                           backgroundColor: comment.id == 1 ? '#CACACA' : '#EAEAEA',
-                           borderRadius:  comment.id == 1 ? '20px 0px 20px 20px' : '0px 20px 20px 20px',
+                           width: 240,
+                           backgroundColor: comment.userId == 1 ? '#CACACA' : '#EAEAEA',
+                           borderRadius: comment.userId == 1 ? '20px 0px 20px 20px' : '0px 20px 20px 20px',
                        }}
                 >
                     <Typography

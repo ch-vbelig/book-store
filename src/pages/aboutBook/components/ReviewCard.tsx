@@ -128,6 +128,7 @@ const ReviewCard: React.FC<ReviewProps> = ({ review }) => {
                             placeholder="Оставьте отзыв на книгу"
                             multiline
                             rows={3}
+                            value={message}
                             sx={{
                                 width: 0.9,
                                 '& .MuiInputBase-input': {

@@ -37,14 +37,13 @@ const ReviewPopup: React.FC = () => {
 
     const handleSaveReview = () => {
         const review = new Review()
-        review.id = 1
+        review.id = rootStore.reviews.reviews.length
         review.bookId = rootStore.library.chosenBook.id
         review.userName = rootStore.user.lastname
         review.rating = rating
         review.message = message
         review.date = new Date()
         review.likes = 0
-
         rootStore.reviews.reviews.push(review)
         handleClose()
     }

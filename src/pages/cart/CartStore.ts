@@ -103,10 +103,10 @@ class CartStore{
         order.bookOrders = this.cart
         order.totalSum = this.totalPrice
         order.numObBooks = this.numOfBooks
-        order.addressIndex = this.addressIndex
-        order.city = this.city
-        order.street = this.street
-        order.house = this.house
+        order.addressIndex = this.addressIndex !== '' ? this.addressIndex : rootStore.user.addressIndex
+        order.city = this.city !== '' ? this.city : rootStore.user.city
+        order.street = this.street !== '' ? this.street : rootStore.user.street
+        order.house = this.house !== '' ? this.house : rootStore.user.house
         order.status = DeliverOrder.CREATED
         order.date = new Date()
         rootStore.orders.addDeliverOrder(order)
