@@ -35,7 +35,7 @@ const BookDescriptionGrid: React.FC<BookDescriptionGridProps> = ({ book }) => {
             rootStore.favorite.addBookToFavorite(book)
             setIsFavorite(true)
         } else {
-            rootStore.auth.toAuthorize()
+            rootStore.auth.openAuthPopup()
         }
     }
 

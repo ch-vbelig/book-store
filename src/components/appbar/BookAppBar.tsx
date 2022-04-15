@@ -67,7 +67,7 @@ const BookAppBar: React.FC = () => {
     const isMenuOpen = Boolean(anchorEl)
 
     const handleOpenAuthPopup = useCallback(() => {
-        rootStore.auth.toAuthorize()
+        rootStore.auth.openAuthPopup()
     }, [])
 
     const handleToMain = () => {

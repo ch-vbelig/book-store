@@ -1,18 +1,35 @@
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material'
 import BookButton from '../../../components/button/BookButton'
-import React from 'react'
+import React, { ChangeEvent, useCallback, useState } from 'react'
 import { observer } from 'mobx-react'
 import rootStore from '../../../stores/RootStore'
 import authUserImage from '../../../assets/images/account_vector.svg'
 
 
 const AuthPopup: React.FC = () => {
+    const [login, setLogin] = useState('')
+    const [password, setPassword] = useState('')
+    const [isError, setIsError] = useState(false)
+
+    const handleLogin = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setLogin(event.target.value)
+    }, [login])
+
+    const handlePassword = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setPassword(event.target.value)
+    }, [password])
+
     const handleEnter = () => {
-        rootStore.auth.authorize()
+        if (login == 'bbc7' && password == '1234') {
+            rootStore.auth.authorize()
+        } else {
+            setIsError(true)
+        }
+
     }
 
     const handleToRegister = () => {
-        rootStore.auth.toRegister()
+        rootStore.auth.openRegisterPopup()
     }
 
     return (
@@ -47,8 +64,11 @@ const AuthPopup: React.FC = () => {
 
                 <TextField
                     required
+                    error={isError}
                     label={'Логин'}
                     variant={'outlined'}
+                    value={login}
+                    onChange={handleLogin}
                     sx={{
                         width: '100%',
                     }}
@@ -56,9 +76,13 @@ const AuthPopup: React.FC = () => {
 
                 <TextField
                     required
+                    error={isError}
                     label={'Пароль'}
                     type={'password'}
                     variant={'outlined'}
+                    value={password}
+                    onChange={handlePassword}
+                    helperText={isError ? 'Неверный логин или пароль' : ''}
                     sx={{
                         width: '100%',
                     }}

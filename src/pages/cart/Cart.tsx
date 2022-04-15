@@ -23,7 +23,7 @@ const Cart: React.FC = () => {
     }, [isAuthorized])
 
     const handleToAuthPopup = useCallback(() => {
-        rootStore.auth.toAuthorize()
+        rootStore.auth.openAuthPopup()
     },[])
 
     const handleToOrderPopup = useCallback(() => {

@@ -1,18 +1,69 @@
 import { observer } from 'mobx-react'
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { ChangeEvent, useCallback, useState } from 'react'
 import BookButton from '../../../components/button/BookButton'
 import rootStore from '../../../stores/RootStore'
 
 
 const SignUpPopup: React.FC = () => {
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [city, setCity] = useState('')
+    const [street, setStreet] = useState('')
+    const [house, setHouse] = useState('')
+    const [addressIndex, setAddressIndex] = useState('')
+    const [login, setLogin] = useState('')
+    const [password, setPassword] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
+    const [isError, setIsError] = useState(false)
+    const [isPasswordNotMatch, setIsPasswordNotMatch] = useState(false)
+
+    const handleFirstname = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setFirstname(event.target.value)
+    }, [])
+
+    const handleLastname = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setLastname(event.target.value)
+    }, [])
+
+    const handleCity = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setCity(event.target.value)
+    }, [])
+
+    const handleStreet = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setStreet(event.target.value)
+    }, [])
+
+    const handleHouse = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setHouse(event.target.value)
+    }, [])
+
+    const handleAddressIndex = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setAddressIndex(event.target.value)
+    }, [])
+
+    const handleLogin = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setLogin(event.target.value)
+    }, [])
+
+    const handlePassword = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setPassword(event.target.value)
+    }, [])
+
+    const handleRepeatPassword = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+        setRepeatPassword(event.target.value)
+    }, [])
+
     const handleRegister = () => {
-        console.log('Registration')
-        rootStore.auth.authorize()
+        if (password !== repeatPassword) {
+            setIsPasswordNotMatch(true)
+        } else {
+            rootStore.auth.authorize()
+        }
     }
 
     const handleToAuthorize = () => {
-        rootStore.auth.toAuthorize()
+        rootStore.auth.openAuthPopup()
     }
 
     return (
@@ -30,7 +81,7 @@ const SignUpPopup: React.FC = () => {
                 zIndex: 10,
                 px: 5,
                 py: 5,
-                overflow: 'scroll'
+                overflow: 'scroll',
             }}
         >
 
@@ -57,6 +108,8 @@ const SignUpPopup: React.FC = () => {
                 <TextField
                     required
                     label={'Имя'}
+                    value={firstname}
+                    onChange={handleFirstname}
                     variant={'outlined'}
                     sx={{
                         width: '100%',
@@ -67,6 +120,8 @@ const SignUpPopup: React.FC = () => {
                     required
                     label={'Фамилия'}
                     variant={'outlined'}
+                    value={lastname}
+                    onChange={handleLastname}
                     sx={{
                         width: '100%',
                     }}
@@ -75,19 +130,42 @@ const SignUpPopup: React.FC = () => {
                     required
                     label={'Город'}
                     variant={'outlined'}
+                    value={city}
+                    onChange={handleCity}
                     sx={{
                         width: '100%',
                     }}
                 />
                 <TextField
                     required
-                    label={'Адрес'}
+                    label={'Улица'}
                     variant={'outlined'}
+                    value={street}
+                    onChange={handleStreet}
                     sx={{
                         width: '100%',
                     }}
                 />
-
+                <TextField
+                    required
+                    label={'Номер дома'}
+                    variant={'outlined'}
+                    value={house}
+                    onChange={handleHouse}
+                    sx={{
+                        width: '100%',
+                    }}
+                />
+                <TextField
+                    required
+                    label={'Индекс'}
+                    variant={'outlined'}
+                    value={addressIndex}
+                    onChange={handleAddressIndex}
+                    sx={{
+                        width: '100%',
+                    }}
+                />
                 <Typography
                     variant={'body1'}
                     sx={{
@@ -101,6 +179,8 @@ const SignUpPopup: React.FC = () => {
                     required
                     label={'Логин'}
                     variant={'outlined'}
+                    value={login}
+                    onChange={handleLogin}
                     sx={{
                         width: '100%',
                     }}
@@ -108,9 +188,12 @@ const SignUpPopup: React.FC = () => {
 
                 <TextField
                     required
+                    error={isPasswordNotMatch}
                     label={'Пароль'}
                     type={'password'}
                     variant={'outlined'}
+                    value={password}
+                    onChange={handlePassword}
                     sx={{
                         width: '100%',
                     }}
@@ -118,9 +201,12 @@ const SignUpPopup: React.FC = () => {
 
                 <TextField
                     required
+                    error={isPasswordNotMatch}
                     label={'Повторите пароль'}
                     type={'password'}
                     variant={'outlined'}
+                    value={repeatPassword}
+                    onChange={handleRepeatPassword}
                     sx={{
                         width: '100%',
                     }}

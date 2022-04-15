@@ -1,4 +1,4 @@
-import AuthPopupStore from './pageStores/AuthPopupStore'
+import AuthPopupStore from '../pages/auth/AuthPopupStore'
 import ProfileStore from './pageStores/ProfileStore'
 import LibraryStore from '../pages/aboutBook/LibraryStore'
 import ReviewStore from './pageStores/ReviewStore'

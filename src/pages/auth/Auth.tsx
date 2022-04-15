@@ -11,7 +11,7 @@ const Auth: React.FC = () => {
     if (!rootStore.auth.isAuthPopup && !rootStore.auth.isRegisterPopup) return null
 
     const handleClose = () => {
-      rootStore.auth.leaveAuthPopup()
+      rootStore.auth.closeAuthPopup()
     }
 
     return ReactDOM.createPortal(
